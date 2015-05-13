@@ -1,7 +1,7 @@
 @page {
   size: 8.5in 11in;
   margin: 0.75in 0.75in 1in 0.75in;
-  
+
   @footnotes {
     columns: 2;
     margin-top: 2em;
@@ -47,12 +47,12 @@ h6 {
   font-weight: bold;
   hyphens: none;
 }
-h1:not(.counter-skip):before,
-h2:not(.counter-skip):before,
-h3:not(.counter-skip):before,
-h4:not(.counter-skip):before,
-h5:not(.counter-skip):before,
-h6:not(.counter-skip):before {
+section > h1:before,
+section > h2:before,
+section > h3:before,
+section > h4:before,
+section > h5:before,
+section > h6:before {
   margin-right: 0.5em;
 }
 h1 {
@@ -160,61 +160,47 @@ a[href^="#"] {
   
 }
 body > :first-child {
-  counter-reset: page 1;
+    counter-reset: page 1;
 }
-h1:not(.counter-skip) {
-  counter-increment: section;
+section {
+    counter-increment: section;
+    counter-reset: subsection;
+    counter-reset: subsubsection;
+    counter-reset: subsubsubsection;
+    counter-reset: subsubsubsubsection;
 }
-h2:not(.counter-skip) {
-  counter-increment: subsection;
+section > section {
+    counter-increment: subsection;
+    counter-reset: subsubsection;
+    counter-reset: subsubsubsection;
+    counter-reset: subsubsubsubsection;
 }
-h3:not(.counter-skip) {
-  counter-increment: subsubsection;
+section > section > section {
+    counter-increment: subsubsection;
+    counter-reset: subsubsubsection;
+    counter-reset: subsubsubsubsection;
 }
-h4:not(.counter-skip) {
-  counter-increment: subsubsection;
+section > section > section > section {
+    counter-increment: subsubsubsection;
+    counter-reset: subsubsubsubsection;
 }
-h5:not(.counter-skip) {
-  counter-increment: subsubsubsection;
+section > section > section > section > section {
+    counter-increment: subsubsubsubsection;
 }
-h6:not(.counter-skip) {
-  counter-increment: subsubsubsubsection;
-}
-h1.counter-reset {
-  counter-reset: section;
-}
-h2.counter-reset {
-  counter-reset: subsection;
-}
-h3.counter-reset {
-  counter-reset: subsubsection;
-}
-h4.counter-reset {
-  counter-reset: subsubsection;
-}
-h5.counter-reset {
-  counter-reset: subsubsubsection;
-}
-h6.counter-reset {
-  counter-reset: subsubsubsubsection;
-}
- h1:not(.counter-skip):before {
+section > h2:before {
   content: ""  counter(section, decimal) "";
 }
- h2:not(.counter-skip):before {
+section > h3:before {
   content: ""  counter(section, decimal) '.' counter(subsection, decimal) "";
 }
- h3:not(.counter-skip):before {
+section > h4:before {
   content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) "";
 }
- h4:not(.counter-skip):before {
-  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) "";
+section > h5:before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) "";
 }
- h5:not(.counter-skip):before {
-  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) "";
-}
- h6:not(.counter-skip):before {
-  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) '.' counter(subsubsubsubsection, decimal) "";
+section > h6:before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) '.' counter(subsubsubsubsection, decimal) "";
 }
 table {
   counter-increment: table;
@@ -357,25 +343,14 @@ cite:before {
   column-break-after: always;
   break-after: always;
 }
-.counter-skip h1:before,
-.counter-skip h2:before,
-.counter-skip h3:before,
-.counter-skip h4:before,
-.counter-skip h5:before,
-.counter-skip h6:before,
-.counter-skip:before {
-  margin-right: 0 !important;
-  content: "" !important;
-}
 h1,
 h2 {
   margin: 1.33333333em 0 0 0;
 }
 h1 {
   text-transform: uppercase;
-}
-h1:not(.counter-skip):before {
-  content: "" counter(section) ".";
+  text-align: center;
+  margin-bottom: 1em;
 }
 h1 + h2,
 h1 + * > h2:first-child {
@@ -455,13 +430,13 @@ cite a {
 .appendix {
   counter-reset: section;
 }
-.appendix h1:not(.counter-skip):before {
+.appendix h1:before {
   content: "" counter(section, upper-alpha) "";
 }
-.appendix h2:not(.counter-skip):before {
+.appendix h2:before {
   content: "" counter(section, upper-alpha) '.' counter(subsection, decimal) "";
 }
-.appendix h3:not(.counter-skip):before {
+.appendix h3:before {
   content: "" counter(section, upper-alpha) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) "";
 }
 .equation {
